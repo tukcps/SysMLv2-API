@@ -1,0 +1,54 @@
+@file:Suppress("unused")
+
+package com.github.tukcps.sysmlv2.api
+
+import com.github.tukcps.sysmlv2.entities.*
+import java.util.*
+
+
+interface ProjectDataVersioningService {
+
+    fun getCommits(projectId: UUID): Collection<Commit>
+
+    /**
+     * Gets head of a commit of a project branch, or default branch if no branch is given
+     */
+    fun getHeadCommit(projectId: UUID, branchId: UUID?): Commit
+
+    /**
+     * Gets a commit by its id
+     */
+    fun getCommitById(projectId: UUID, commitId: UUID?): Commit
+    fun createCommit(projectId: UUID, commit: Commit): Commit
+    fun getCommitChange()
+    fun getCommitChangeById()
+    fun getBranches(projectId: UUID): Collection<Branch>
+    fun getBranchById(projectId: UUID, branchId: UUID?): Branch
+    fun getDefaultBranch(projectId: UUID): UUID
+    fun setDefaultBranch(projectId: UUID, branchID: UUID)
+    fun createBranch(projectId: UUID, branch: Branch)
+    fun deleteBranch(projectId: UUID, branchId: UUID): Boolean
+    fun getTags(projectId: UUID): Collection<Tag>
+    fun getTagById(projectId: UUID, tagId: UUID): Tag
+    fun getExternalRelationships()
+
+    /**
+     * Writes all information from a commit into the repository, and returns an id of the commit.
+     * When writing to the repository, the packages among the elements will be tagged with the revision tag that will also be returned in response.
+     * @param name a user-given name
+     * @param description a brief description of the commit
+     * @param changes, the committed data, consisting of a data class CommitData with
+     * - all elements defined in the commit,
+     * - all properties defined in the commit
+     * - all relations defined in the document
+     * - globalUId of the root of decomposition
+     * @param previousCommit the id of the previous version of the document
+     * @return An id that uniquely identifies the commit
+     */
+    fun commit(
+        owningProject: UUID,
+        name: String?,
+        description: String?,
+        payload: List<CommitDataObject>,
+        previousCommit: UUID? = null): UUID
+}

@@ -1,0 +1,62 @@
+package io.github.tukcps.sysmlv2.entities.requestModels.commitData
+
+import com.fasterxml.jackson.annotation.JsonTypeName
+import io.github.tukcps.sysmlv2.entities.Identified
+import java.util.*
+
+@JsonTypeName(CommitType.RELATIONSHIP)
+class RelationshipCommitData(
+    id: UUID,
+    type: String,       // mandatory type of the metamodel as annotation
+    aliasIds: List<String> = ArrayList(),
+    declaredName: String? = null,
+    declaredShortName: String? = null,
+    documentation: Identified? = null,
+    elementId: String? = null,
+    var isImplied: Boolean? = null,
+    isImpliedIncluded: Boolean? = null,
+    isLibraryElement: Boolean? = null,
+    name: String? = null,
+    ownedAnnotation: List<Identified> = ArrayList(),
+    ownedElement: List<Identified> = ArrayList(),
+    var ownedRelatedElement: Identified? = null,
+    ownedRelationship: List<Identified> = ArrayList(),
+    owner: Identified? = null,
+    owningMembership: Identified? = null,
+    owningNamespace: Identified? = null,
+    var owningRelatedElement: Identified? = null,
+    owningRelationship: Identified? = null,
+    qualifiedName: String? = null,
+    var relatedElement: Identified? = null,
+    shortName: String? = null,
+    var source: List<Identified> = ArrayList(),
+    var target: List<Identified> = ArrayList(),
+    textualRepresentation: List<Identified> = ArrayList(),
+    body: String? = null,
+    direction: String? = null,
+    language: String? = null,
+): CommitData(
+    id = id,
+    type = type,
+    aliasIds = aliasIds,
+    declaredName = declaredName,
+    declaredShortName = declaredShortName,
+    documentation = documentation,
+    elementId = elementId,
+    isImpliedIncluded = isImpliedIncluded,
+    isLibraryElement = isLibraryElement,
+    name= name,
+    ownedAnnotation = ownedAnnotation,
+    ownedElement = ownedElement,
+    ownedRelationship = ownedRelationship,
+    owner = owner,
+    owningMembership = owningMembership,
+    owningNamespace = owningNamespace,
+    owningRelationship = owningRelationship,
+    qualifiedName = qualifiedName,
+    shortName = shortName,
+    textualRepresentation = textualRepresentation,
+    body = body,
+    direction = direction,
+    language = language,
+)
